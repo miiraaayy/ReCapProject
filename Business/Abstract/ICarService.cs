@@ -8,5 +8,7 @@ namespace Business.Abstract
     public interface ICarService
     {
         List<Car> GetAll();
+        List<Car> GetByDailyPrice(decimal min);
+        void Add(Car car);       
     }
 }

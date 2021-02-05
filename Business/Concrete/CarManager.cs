@@ -16,9 +16,28 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
+        public void Add(Car car)
+        {
+            if (car.DailyPrice > 0)
+            {
+                _carDal.Add(car);
+                Console.WriteLine("Fiyat bilgisi tanımlanmıştır.");
+            }
+            else
+            {
+                Console.WriteLine("Lütfen girdğiniz fiyat 0 ' dan büyük olmalıdır.");
+            }
+        }
+
         public List<Car> GetAll()
         {
             return _carDal.GetAll();
         }
+
+        public List<Car> GetByDailyPrice(decimal min)
+        {
+            return _carDal.GetAll(c => c.DailyPrice >= min);
+        }
+
     }
 }
