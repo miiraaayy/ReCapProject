@@ -1,8 +1,10 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFrameWork;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
@@ -29,6 +31,15 @@ namespace Business.Concrete
             }
         }
 
+        public void Delete(Car car)
+        {
+            using (CarsModelsContext context = new CarsModelsContext())
+            {
+                context.Cars.Remove(context.Cars.SingleOrDefault(c => c.CarId == car.CarId));
+                context.SaveChanges();
+            }
+        }
+
         public List<Car> GetAll()
         {
             return _carDal.GetAll();
@@ -39,5 +50,9 @@ namespace Business.Concrete
             return _carDal.GetAll(c => c.DailyPrice >= min);
         }
 
+        public void Update(Car car)
+        {
+            _carDal.Update(car);
+        }
     }
 }

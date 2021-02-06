@@ -9,6 +9,8 @@ namespace Business.Abstract
     {
         List<Car> GetAll();
         List<Car> GetByDailyPrice(decimal min);
-        void Add(Car car);       
+        void Add(Car car);
+        void Delete(Car car);
+        void Update(Car car);
     }
 }

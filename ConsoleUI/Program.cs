@@ -17,7 +17,7 @@ namespace ConsoleUI
             Console.WriteLine("Arabalar Listeleniyor...");
             foreach (var car in carManager.GetAll())
             {
-                Console.WriteLine(car.CarId + " ) Arabanın modeli :  " + car.ModelYear + " -  Ürün Fiyatı " + car.DailyPrice + " - Ürün Açıklaması :  " + car.Description); 
+                Console.WriteLine(car.CarId + " ) Arabanın modeli :  " + car.ModelYear + " -  Ürün Fiyatı " + car.DailyPrice + " - Ürün Açıklaması :  " + car.Description);
             }
             Console.WriteLine("-------------------------------------------------------");
             Console.WriteLine("Araba Marka Seçenekleri yükleniyor.. ");
@@ -35,8 +35,12 @@ namespace ConsoleUI
 
             Console.WriteLine("-------------------------------------------------------");
 
-            carManager.Add(new Car {CarId = 8 , ModelYear = 2018 , DailyPrice = 75000 ,Description ="Temiz ve rahat" });
-            brandManager.Add(new Brand { BrandId = 7 , BrandName = "Toyota"});
+            carManager.Add(new Car { ModelYear = 2018, DailyPrice = 75000, Description = "Temiz ve rahat" });
+            brandManager.Add(new Brand { BrandName = "Toyota" });
+
+            //carManager.Delete(new Car { CarId = 5  });
+            //brandManager.Delete(new Brand { BrandId = 4 });
+
 
 
         }

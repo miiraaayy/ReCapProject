@@ -9,5 +9,7 @@ namespace Business.Abstract
     {
         List<Brand> GetAll();
         void Add(Brand brand);
+        void Delete(Brand brand);
+        void Update(Brand brand);
     }
 }
