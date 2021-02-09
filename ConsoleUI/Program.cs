@@ -15,7 +15,7 @@ namespace ConsoleUI
             ColorManager colorManager = new ColorManager(new EfColorDal());
 
             CarTest();
-            //CrudTest(carManager, brandManager, colorManager);
+            CrudTest(carManager, brandManager, colorManager);
 
         }
 
@@ -36,6 +36,10 @@ namespace ConsoleUI
             {
                 Console.WriteLine(car.CarId + " ) Arabanın modeli :  " + car.ModelYear + " -  Ürün Fiyatı " + car.DailyPrice + " - Ürün Açıklaması :  " + car.Description);
             }
+            foreach (var car in carManager.GetById())
+            {
+                Console.WriteLine(car.CarId);
+            }
             Console.WriteLine("-------------------------------------------------------");
             Console.WriteLine("Araba Marka Seçenekleri yükleniyor.. ");
 
@@ -54,10 +58,15 @@ namespace ConsoleUI
             Console.WriteLine("-------------------------------------------------------");
 
             carManager.Add(new Car { ModelYear = 2018, DailyPrice = 75000, Description = "Temiz ve rahat" });
+            carManager.Update(new Car { CarId = 4, ModelYear = 2018, DailyPrice = 75000 });
             brandManager.Add(new Brand { BrandName = "Toyota" });
+            colorManager.Add(new Color { ColorName = "Kahverengi" });
 
-            carManager.Delete(new Car { CarId = 5 });
-            brandManager.Delete(new Brand { BrandId = 4 });
+
+
+            carManager.Delete(new Car { CarId = 2009 });
+            brandManager.Delete(new Brand { BrandId = 1015 });
+            colorManager.Delete(new Color { ColorId = 8 });
         }
     }
 }

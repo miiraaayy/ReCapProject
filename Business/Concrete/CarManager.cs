@@ -51,6 +51,11 @@ namespace Business.Concrete
             return _carDal.GetAll(c => c.DailyPrice >= min);
         }
 
+        public List<Car> GetById()
+        {
+            return _carDal.GetById();
+        }
+
         public List<CarDetailDto> GetCarDetails()
         {
             return _carDal.GetCarDetails();
@@ -59,6 +64,7 @@ namespace Business.Concrete
         public void Update(Car car)
         {
             _carDal.Update(car);
+            Console.WriteLine(car.CarId + " "+ car.ModelYear+ " " + car.DailyPrice);
         }
     }
 }
