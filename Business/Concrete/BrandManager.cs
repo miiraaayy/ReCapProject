@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFrameWork;
 using Entities.Concrete;
@@ -18,36 +20,43 @@ namespace Business.Concrete
             _brandDal = brandDal;
         }
 
-        public void Add(Brand brand)
+        public IResult Add(Brand brand)
         {
-            if (brand.BrandName.Length >= 2)
+            if (brand.BrandName.Length <= 2)
             {
-                _brandDal.Add(brand);
-                Console.WriteLine("Ekleme başarıyla gerçekleştirilmiştir.");
+                return new ErrorResult(Messages.BrandError);
+                
             }
-            else
-            {
-                Console.WriteLine("Lütfen girdiğiniz marka 2 karakterli olmak zorundadır!");
-            }
+            _brandDal.Add(brand);
+            return new SuccessResult(Messages.BrandAdded);
+            
         }
 
-        public void Delete(Brand brand)
+        public IResult Delete(Brand brand)
         {
             using (CarsModelsContext context = new CarsModelsContext())
             {
                 context.Brands.Remove(context.Brands.SingleOrDefault(b => b.BrandId == brand.BrandId));
                 context.SaveChanges();
             }
+            return new SuccessResult(Messages.BrandDelete);
         }
 
-        public List<Brand> GetAll()
+        public IDataResult<List<Brand>> GetAll()
         {
-            return _brandDal.GetAll();
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll());
         }
 
-        public void Update(Brand brand)
+        public IDataResult<Brand> GetById(int brandId)
+        {
+            return new SuccessDataResult<Brand>(_brandDal.Get(b => b.BrandId == brandId));
+           
+        }
+
+        public IResult Update(Brand brand)
         {
             _brandDal.Update(brand);
+            return new SuccessResult(Messages.BrandUpdate);
         }
     }
 }
