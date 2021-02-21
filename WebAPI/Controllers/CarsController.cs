@@ -43,6 +43,16 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+        [HttpGet("getbydailyprice")]
+        public IActionResult GetByDailyPrice(decimal min)
+        {
+            var result = _carService.GetByDailyPrice(min);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
 
         [HttpPost("add")]
         public IActionResult Add(Car car)
